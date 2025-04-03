@@ -28,39 +28,37 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 to-blue-500 p-6">
-      <div className="w-full max-w-lg bg-white shadow-xl rounded-lg p-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Incident Prediction
-        </h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500 to-green-500 p-6">
+      <div className="w-full max-w-md bg-white shadow-2xl rounded-2xl p-8">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Incident Prediction</h1>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1">Date : </label>
+            <label className="block text-gray-700 text-sm font-medium mb-2">Date:</label>
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1">Assignment Group : </label>
+            <label className="block text-gray-700 text-sm font-medium mb-2">Assignment Group:</label>
             <input
               type="text"
               value={assignmentGroup}
               onChange={(e) => setAssignmentGroup(e.target.value)}
               placeholder="Enter assignment group"
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white pt-10 py-3 rounded-lg hover:bg-black transition-all font-semibold text-lg"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-800 transition-all font-semibold text-lg"
             disabled={loading}
           >
             {loading ? "Submitting..." : "Submit"}

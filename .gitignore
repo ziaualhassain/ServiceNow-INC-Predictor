@@ -1,2 +1,16 @@
 /.DS_Store
 /.venv
+frontend/node_modules/
+frontend/.env
+!frontend/package.json
+
+backend/.env
+backend/__pycache__/
+backend/feature_order.pkl
+backend/incident_model.pkl
+backend/incident_scaler.pkl
+backend/get-pip.py
+backend/hello.py
+backend/main-via-terminal.py
+backend/get-pip.py
+!backend/requirements.txt

@@ -15,89 +15,70 @@ function App() {
     setResponse(null);
 
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/predict",
-        {
-          date,
-          assignment_group: assignmentGroup,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const res = await axios.post("http://127.0.0.1:8000/predict", {
+        date,
+        assignment_group: assignmentGroup,
+      });
       setResponse(res.data);
     } catch (err) {
-      setError("Failed to fetch data. Please try again.");
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Inc Prediction For Assignment Group</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 to-blue-500 p-6">
+      <div className="w-full max-w-lg bg-white shadow-xl rounded-lg p-6">
+        <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Incident Prediction
+        </h1>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <div className="flex flex-col">
-            <label htmlFor="date" className="font-medium text-gray-700">Date</label>
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">Date : </label>
             <input
-              id="date"
               type="date"
-              className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               value={date}
               onChange={(e) => setDate(e.target.value)}
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
               required
             />
           </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="assignment-group" className="font-medium text-gray-700">Assignment Group</label>
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">Assignment Group : </label>
             <input
-              id="assignment-group"
               type="text"
-              className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter assignment group"
               value={assignmentGroup}
               onChange={(e) => setAssignmentGroup(e.target.value)}
+              placeholder="Enter assignment group"
+              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded-md transition-all duration-200"
+            className="w-full bg-green-600 text-white pt-10 py-3 rounded-lg hover:bg-black transition-all font-semibold text-lg"
             disabled={loading}
           >
             {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
 
-        {error && (
-          <div className="mt-4 p-3 border border-red-300 rounded-md bg-red-50 text-red-600 text-center">
-            {error}
-          </div>
-        )}
+        {error && <p className="text-red-500 text-sm mt-3 text-center">{error}</p>}
 
         {response && (
-          <div className="mt-6 p-4 border rounded-md bg-gray-50 shadow-sm">
-            <h2 className="text-lg font-semibold border-b pb-2 mb-3 text-gray-700">Prediction Results</h2>
-            
-            <div className="mb-4 text-gray-600">
-              <p className="flex justify-between py-1">
-                <span className="font-medium">Date:</span>
-                <span>{response.date}</span>
-              </p>
-              <p className="flex justify-between py-1">
-                <span className="font-medium">Assignment Group:</span>
-                <span>{response.assignment_group}</span>
-              </p>
-            </div>
+          <div className="mt-6 p-6 bg-gray-100 rounded-lg shadow-md">
+            <h2 className="text-gray-700 font-semibold text-lg mb-2">Prediction Results</h2>
+            <p className="text-gray-600"><strong>Date:</strong> {response.date}</p>
+            <p className="text-gray-600"><strong>Assignment Group:</strong> {response.assignment_group}</p>
 
-            <h3 className="font-semibold mb-2 text-gray-700">Predictions:</h3>
-            <ul className="space-y-1">
+            <h3 className="text-gray-700 font-semibold mt-4">Predictions:</h3>
+            <ul className="text-gray-600 text-sm mt-2 space-y-2">
               {Object.entries(response.predictions).map(([key, value]) => (
-                <li key={key} className="flex justify-between px-2 py-1 border-b border-gray-200 text-gray-600">
+                <li key={key} className="flex justify-between bg-white p-2 rounded shadow-sm">
                   <span className="font-medium">{key}:</span>
                   <span>{value}</span>
                 </li>
